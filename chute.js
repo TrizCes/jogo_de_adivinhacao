@@ -1,31 +1,36 @@
-let brincar = prompt('Vamos brincar de adivinhar? (Responda S para sim ou N para não').toUpperCase();
+const chute = document.getElementById('chute');
+const iniciarPalpite = document.getElementById('startGame');
+const iniciarNovoJogo = document.getElementById('newGame');
+const resposta = document.getElementById('response');
+const mensagemDica = document.getElementById('message');
 
-while (brincar === 'S') {
-  const chute = parseInt(prompt('Digite seu chute: (um numero entre 1 e 100)'));
-  let numero = Math.floor(Math.random() * 100 + 1);
+let numero = Math.floor(Math.random() * 10 + 1);
+const tentativas = [];
 
-  if (chute == numero) {
-    alert('Você acertou! Hoje é seu dia de sorte!');
+const jogo = () => {
+  console.log(chute.value);
+  const palpite = parseInt(chute.value);
+  console.log('jogando');
+  tentativas.push(palpite);
+  if (palpite === numero) {
+    const gratificacao = resposta.appendChild(document.createElement('h2'));
+    gratificacao.innerText = 'Parabéns você acertou o número!';
+
+    const mensagemParagrafo = resposta.appendChild(document.createElement('p')); // Cria um elemento 'p'
+    mensagemParagrafo.innerText = `Você acertou o número na ${tentativas.length}ª tentativa`;
+
+    iniciarPalpite.disabled = true;
+    iniciarNovoJogo.disabled = false;
   } else {
-    let contMais = chute;
-    const limiteMais = chute + 5;
-    const limiteMenos = chute - 5;
-    let contMenos = chute;
-
-    while (contMais < limiteMais || contMenos > limiteMenos) {
-      if (contMais === numero || contMenos === numero) {
-        console.log(contMais);
-        console.log(contMenos);
-        console.log(numero);
-        alert('Passou perto, mas não foi dessa vez!');
-      } else {
-        contMais++;
-        contMenos--;
-      }
-    }
-    alert('O numero era: ' + numero + '\nBoa sorte na proxima!');
+    mensagemDica.innerText = 'Continue jogando, a sorte encontra que persiste!';
   }
-  brincar = prompt('Vamos brincar de adivinhar? (Responda S para sim ou N para não').toUpperCase();
-}
+};
 
-alert('Até a proxima! ');
+const novoJogo = () => {
+  numero = Math.floor(Math.random() * 10 + 1);
+  mensagemDica.innerText = '';
+  iniciarPalpite.disabled = false;
+  iniciarNovoJogo.disabled = true;
+  resposta.removeChild(resposta.querySelector('h2'));
+  resposta.removeChild(resposta.querySelector('p'));
+};
