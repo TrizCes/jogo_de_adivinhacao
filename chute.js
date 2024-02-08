@@ -4,7 +4,7 @@ const iniciarNovoJogo = document.getElementById('newGame');
 const resposta = document.getElementById('response');
 const mensagemDica = document.getElementById('message');
 
-let numero = Math.floor(Math.random() * 100 + 1);
+let numero = Math.floor(Math.random() * 10 + 1);
 const tentativas = [];
 
 const jogo = () => {
