@@ -23,7 +23,7 @@ const jogo = () => {
     iniciarNovoJogo.style.display = 'flex';
     chute.style.backgroundColor = 'rgb(5, 119, 190)';
   } else {
-    mensagemDica.innerText = 'Continue jogando, a sorte encontra que persiste!';
+    mensagemDica.innerText = 'Continue jogando, a sorte encontra quem persiste!';
   }
 };
 
